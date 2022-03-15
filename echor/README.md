@@ -23,4 +23,10 @@ predicates = "2"
 run all the tests with names containing the string dies.
 ```
 cargo test dies
-````
+```
+
+
+## Create expected output
+```
+  mk-outs.sh
+```
