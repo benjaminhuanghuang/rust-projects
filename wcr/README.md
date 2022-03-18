@@ -5,5 +5,8 @@ From  Command-Line Rust: A Project-Based Primer for Writing Rust CLIs, Ch 5
 
 
  
+The -m flag comes last, so characters are shown.
+
+The -c flag comes last, so bytes are shown.
 
 

@@ -8,9 +8,13 @@ type MyResult<T> = Result<T, Box<dyn Error>>;
 #[derive(Debug)]
 pub struct Config {
   files: Vec<String>,
+  //whether or not to print the line count.
   lines: bool,
+  //whether or not to print the word count
   words: bool,
+  //whether or not to print the byte count
   bytes: bool,
+  //whether or not to print the character count
   chars: bool,
 }
 
@@ -66,11 +70,14 @@ pub fn get_args() -> MyResult<Config> {
     )
     .get_matches();
 
+  //If all the flags are false, then set lines, words, and bytes to true  
   let mut lines = matches.is_present("lines");
   let mut words = matches.is_present("words");
   let mut bytes = matches.is_present("bytes");
   let chars = matches.is_present("chars");
 
+  //compare each value to &false, which is a reference to a Boolean value
+  // or use |v| !v
   if [words, bytes, chars, lines].iter().all(|v| v == &false) {
     lines = true;
     words = true;
