@@ -52,12 +52,12 @@ pub struct HttpRequest {
 
 impl From<String> for HttpRequest {
   // 这里用String？
-  fn from(s: String) -> Self {
+  fn from(req: String) -> Self {
     let mut parsed_method = Method::Uninitialized;
     let mut parsed_version = Version::Uninitialized;
     let mut parsed_resource = Resource::Path("".to_string());
     let mut parsed_headers = HashMap::new();
-    let mut parsed_msg_body = "".to_string();
+    let mut parsed_msg_body = "";
 
     for line in req.lines() {
       if line.contains("HTTP") {
@@ -66,6 +66,8 @@ impl From<String> for HttpRequest {
         parsed_resource = resource;
         parsed_version = version;
       } else if line.contains(":") {
+        let (k, v) = process_header_line(line);
+        parsed_headers.insert(k, v);
       } else if line.len() == 0 {
       } else {
         parsed_msg_body = line;
@@ -124,4 +126,22 @@ mod tests {
     let v: Version = "HTTP/1.1".into();
     assert_eq!(v, Version::V1_1)
   }
+
+  #[test]
+  fn test_read_http(){
+    let s: String = String::from("GET /greeting HTTP/1.1\r\nHost: localhost:8964\r\nUser-Agent: curl/7.71.1\r\nAccept: */*\r\n\r\n");
+    
+    let mut headers_expected = HashMap::new();
+    headers_expected.insert("Host".into(), " localhost".into());
+    headers_expected.insert("Accept".into(), " */*".into());
+    headers_expected.insert("User-Agent".into(), " curl/7.71.1".into());
+
+    let req: HttpRequest = s.into();
+
+    assert_eq!(Method::Get, req.method);
+    assert_eq!(Version::V1_1, req.version);
+    assert_eq!(Resource::Path("/greeting".to_string()), req.resource);
+    assert_eq!(headers_expected, req.headers);
+  }
+
 }
