@@ -24,8 +24,9 @@ impl<'a> Server<'a> {
       println!("Connection established!");
  
       let mut read_buffer = [0; 1024];
-
       stream.read(&mut read_buffer).unwrap();
+
+      // convert string to http request
       let req: HttpRequest = String::from_utf8(read_buffer.to_vec()).unwrap().into();
       Router::router(req, &mut stream);
     }
