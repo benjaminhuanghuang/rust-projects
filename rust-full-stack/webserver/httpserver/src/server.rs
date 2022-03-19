@@ -28,7 +28,7 @@ impl<'a> Server<'a> {
 
       // convert string to http request
       let req: HttpRequest = String::from_utf8(read_buffer.to_vec()).unwrap().into();
-      Router::router(req, &mut stream);
+      Router::route(req, &mut stream);
     }
   }
 }

@@ -1,4 +1,4 @@
-  use http::{httprequest, httprequest::HttpRequest, httpresponse::HttpResponse};
+  use http::{httprequest::HttpRequest, httpresponse::HttpResponse};
 use serde::{Deserialize, Serialize};
 
 use std::collections::HashMap;
@@ -83,13 +83,13 @@ impl Handler for WebServiceHandler {
     let route: Vec<&str> = s.split("/").collect();
     
     match route[2] {
-      "shipping" if route.len() > 2 && route[3] == "orders" {
+      "shipping" if route.len() > 2 && route[3] == "orders" => {
        let body = Some(serde_json::to_string(&Self::load_json()).unwrap());
        let mut headers: HashMap<&str, &str> = HashMap::new();
        headers.insert("Content-Type", "application/json");
        HttpResponse::new("200", Some(headers), body)
       }
-      _ =>  None =>  HttpResponse::new("404", None, Self::load_file("404.html"))
+      _ =>  HttpResponse::new("404", None, Self::load_file("404.html"))
     }
   }
 }
