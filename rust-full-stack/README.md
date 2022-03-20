@@ -8,11 +8,26 @@ TcpListenter
 
 
 # Run
+tcp
 
 ```
   cargo run -p tcpserver
 
   cargo run -p tcpclient
 
+
+```
+
+webserver
+```
   cargo test -p http
+
+  cargo test -p httpserver
+```
+
+actix webservice
+``` 
+  cde actixWS
+  
+  cargo run -p webservice --bin server1
 ```
