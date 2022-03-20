@@ -10,3 +10,4 @@ pub async fn health_check_handler(app_state: web::Data<AppState>) -> HttpRespons
 
   HttpResponse::Ok().json(&response)
 }
+  

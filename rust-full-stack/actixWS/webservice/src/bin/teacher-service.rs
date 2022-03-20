@@ -11,6 +11,9 @@ mod routers;
 #[path = "../state.rs"]
 mod state;
 
+#[path = "../models.rs"]
+mod models;
+
 use routers::*;
 use state::AppState;
 
@@ -19,10 +22,11 @@ use state::AppState;
 async fn main() -> std::io::Result<()> {
   let shared_data = web::Data::new(AppState {
     health_check_response: "I'm OK.".to_string(),
-    visit_count: Mutex::new(0)
+    visit_count: Mutex::new(0), 
+    courses: Mutex::nex(vec![])
   });
   
-  let app = move || App::new().app_data(shared_data).configure(general_routes);
+  let app = move || App::new().app_data(shared_data.clone()).configure(general_routes);
 
   HttpServer::new(app).bind("127.0.0.1:8964")?.run().await
 } 
