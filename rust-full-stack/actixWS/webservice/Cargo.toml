@@ -14,4 +14,4 @@ actix-rt = "1.1.1"
 name = "server1"
 
 [[bin]]
-name = "teacher-server1"
+name = "teacher-service"
