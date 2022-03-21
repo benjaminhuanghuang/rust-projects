@@ -26,7 +26,7 @@ pub struct Course {
 pub struct CreateCourse {
   pub teacher_id: i32,
   pub name: String,
-  pub descripton: Option<String>,
+  pub description: Option<String>,
   pub format: Option<String>,
   pub structure: Option<String>,
   pub duration: Option<String>,
@@ -42,7 +42,7 @@ impl TryFrom<web::Json<CreateCourse>> for CreateCourse {
     Ok(CreateCourse {
       teacher_id: course.teacher_id,
       name: course.name.clone(),
-      descripton: course.descripton.clone(),
+      description: course.description.clone(),
       format: course.format.clone(),
       structure: course.structure.clone(),
       duration: course.duration.clone(),
