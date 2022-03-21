@@ -17,7 +17,7 @@ pub async fn get_courses_for_teacher_db(pool: &PgPool, teacher_id: i32) -> Vec<C
   rows
     .iter
     .map(|r| Course {
-      id: r.id,
+      id: Some(r.id),
       teacher_id: r.teacher_id,
       name: r.name.clone(),
       time: Some(NaiveDateTime::from(r.time.unwrap())),
@@ -38,7 +38,7 @@ pub async fn get_course_details_db(pool: &PgPool, teacher_id: i32, course_id: i3
   .unwrap();
 
   Course {
-    id: row.id,
+    id: Some(row.id),
     teacher_id: row.teacher_id,
     name: row.name.clone(),
     time: Some(NaiveDateTime::from(row.time.unwrap())),
@@ -58,7 +58,7 @@ pub async fn post_new_course_db(pool: &PgPool, new_course: Course) -> Course {
   .unwrap();
 
   Course {
-    id: row.id,
+    id: Some(row.id),
     teacher_id: r.teacher_id,
     name: row.name.clone(),
     time: Some(NaiveDateTime::from(row.time.unwrap())),
