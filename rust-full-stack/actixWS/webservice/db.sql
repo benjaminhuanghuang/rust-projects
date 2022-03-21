@@ -6,7 +6,14 @@ create table course
   id serial primary key,
   teacher_id INT not null,
   name varchar(140) not null,
-  time TIMESTAMP default now()
+  time TIMESTAMP default now(),
+  description varchar(2000),
+  format varchar(20),
+  struct varchar(2000),
+  duration varchar(2000),
+  language varchar(2000),
+  level varchar(2000),
+  price integer,
 )
 
 

@@ -13,7 +13,7 @@ pub enum MyError {
 
 #[derive(Debug, Serialize)]
 pub struct MyErrorResponse {
-  error_message: String, 
+  pub error_message: String,
 }
 
 
